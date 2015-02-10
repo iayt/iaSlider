@@ -1,10 +1,9 @@
 /******************************************************
 
 	iaSlider
-
-	- update 5.0 (01.07.'14)
-	- update 5.1 (04.07.'14)
-	- update 5.2 (05.02.'15)
+	
+	- update (05.02.'15)
+	- update (10.02.'15)
 	
 *******************************************************/
 var winW = $(window).width();
@@ -37,7 +36,7 @@ $.fn.iaSlider = function(config){
 		//ie =  navigator.userAgent.match(/msie/i),
 		slct,t,frstSlct;
 	
-	// add mask
+	// add Div/Mask
 	$(dID).wrap("<div id='"+IDa+"' class='iaSlider' />"); 
 	$(dIDa).append('<div class="listNumb"><a id="prv" class="prv"><span></span></a><a id="nxt" class="nxt"><span></span></a></div>');
 	$(dIDa).append('<div class="navi"></div>');
@@ -94,16 +93,16 @@ $.fn.iaSlider = function(config){
 		sar();
 	}
 
-	// mouseOver-Stop / mouseOut-Play
+	//mouseOver-Stop / mouseOut-Play
 	$(dIDa).hover(
 		function () {stopSlide();},
-		function () {t=setTimeout(sar, (config.time*1000))}
+		function () {if(config.autoPlay == 'play'){t=setTimeout(sar,(config.time*1000))}}
 	)
 	
 	// prv click
 	$(dIDa+" .prv").click(function () {
 		if (stage >= 1) {
-			eval('$(dIDa+" .sliderArea").animate({' + config.itinerary + ': "+="+config.width+"px"});');
+			eval('$(dIDa+" .sliderArea").animate({' + config.itinerary + ': "+="+config.width+"px"},1000);');
 			stage--;
 			$(dIDa+" .navi a").removeClass("selected");
 			$(dIDa+" .navi a:eq("+stage+")").addClass("selected");
@@ -131,11 +130,11 @@ $.fn.iaSlider = function(config){
 	$(dIDa+" .navi a").click(function () {
 		var gotoSlctd =  ($(this).attr('rel') - stage) * config.width;
 		
-		eval('$(dIDa+" .sliderArea").animate({' + config.itinerary + ': "-="+gotoSlctd+"px"});');
+		eval('$(dIDa+" .sliderArea").animate({' + config.itinerary + ': "-="+gotoSlctd+"px"},1000);');
 		stage = $(this).attr('rel');
 		
-		$(".navi a").removeClass("selected");
-		$(".navi a:eq("+stage+")").addClass("selected");
+		$(dIDa+" .navi a").removeClass("selected");
+		$(dIDa+" .navi a:eq("+stage+")").addClass("selected");
 		
 	});	
 
@@ -144,12 +143,10 @@ $.fn.iaSlider = function(config){
 
 
 
-
-
 // ready
 $(document).ready(function(){
 	
-		$("#news").iaSlider({
+		$("#yeniCikanlar").iaSlider({
 			 width:305
 		});
 	
