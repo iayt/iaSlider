@@ -2,9 +2,6 @@
 
 	iaSlider
 	
-	- update (05.02.'15)
-	- update (10.02.'15)
-	
 *******************************************************/
 var winW = $(window).width();
 var winH = $(window).height();
@@ -146,7 +143,7 @@ $.fn.iaSlider = function(config){
 // ready
 $(document).ready(function(){
 	
-		$("#yeniCikanlar").iaSlider({
+		$("#banner").iaSlider({
 			 width:305
 		});
 	
